@@ -1,5 +1,5 @@
 module "label" {
-  source             = "git::ssh://git@git.testplant.com/devops/tf-mod-label.git?ref=master"
+  source             = "git::https://github.com/Callumccr/tf-mod-label.git?ref=master"
   context            = var.context
   namespace          = var.namespace
   environment        = var.environment
@@ -11,7 +11,7 @@ module "label" {
 }
 
 module "private_subnet_label" {
-  source     = "git::ssh://git@git.testplant.com/devops/tf-mod-label.git?ref=master"
+  source     = "git::https://github.com/Callumccr/tf-mod-label.git?ref=master"
   context    = module.label.context
   attributes = compact(concat(module.label.attributes, ["private", "subnet"]))
 
@@ -22,7 +22,7 @@ module "private_subnet_label" {
 }
 
 module "private_acl_label" {
-  source     = "git::ssh://git@git.testplant.com/devops/tf-mod-label.git?ref=master"
+  source     = "git::https://github.com/Callumccr/tf-mod-label.git?ref=master"
   context    = module.label.context
   attributes = compact(concat(module.label.attributes, ["private", "acl"]))
   tags = merge(module.label.tags, {
