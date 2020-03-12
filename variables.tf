@@ -3,18 +3,33 @@
 # -----------------------------------------------------------------------------
 
 variable "aws_region" {
-  description = "(Required) - The AWS region (e.g. ap-southeast-2). Autoloaded from region.tfvars."
+  description = "The AWS region (e.g. ap-southeast-2). Autoloaded from region.tfvars."
   type        = string
-}
-
-variable "availability_zones" {
-  description = "(Required) - The AWS avaialbility zones (e.g. ap-southeast-2a/b/c). Autoloaded from region.tfvars."
-  type        = list(string)
+  default     = ""
 }
 
 variable "aws_account_id" {
-  description = "(Required) - The AWS account id of the provider being deployed to (e.g. 12345678). Autoloaded from account.tfvars"
+  description = "The AWS account id of the provider being deployed to (e.g. 12345678). Autoloaded from account.tfvars"
   type        = string
+  default     = ""
+}
+
+variable "aws_assume_role_arn" {
+  description = "(Optional) - ARN of the IAM role when optionally connecting to AWS via assumed role. Autoloaded from account.tfvars."
+  type        = string
+  default     = ""
+}
+
+variable "aws_assume_role_session_name" {
+  description = "(Optional) - The session name to use when making the AssumeRole call."
+  type        = string
+  default     = ""
+}
+
+variable "aws_assume_role_external_id" {
+  description = "(Optional) - The external ID to use when making the AssumeRole call."
+  type        = string
+  default     = ""
 }
 
 # -----------------------------------------------------------------------------
@@ -102,7 +117,7 @@ variable "map_public_ip_on_launch" {
 }
 
 # -----------------------------------------------------------------------------
-# Variables: TF-MOD-LABEL - Autoloaded from Terragrunt
+# Variables: TF-MOD-LABEL
 # -----------------------------------------------------------------------------
 
 variable "namespace" {
@@ -139,35 +154,4 @@ variable "tags" {
   type        = map(string)
   default     = {}
   description = "(Optional) - Additional tags"
-}
-
-
-variable "context" {
-  type = object({
-    namespace           = string
-    environment         = string
-    stage               = string
-    name                = string
-    enabled             = bool
-    delimiter           = string
-    attributes          = list(string)
-    label_order         = list(string)
-    tags                = map(string)
-    additional_tag_map  = map(string)
-    regex_replace_chars = string
-  })
-  default = {
-    namespace           = ""
-    environment         = ""
-    stage               = ""
-    name                = ""
-    enabled             = true
-    delimiter           = ""
-    attributes          = []
-    label_order         = []
-    tags                = {}
-    additional_tag_map  = {}
-    regex_replace_chars = ""
-  }
-  description = "Default context to use for passing state between label invocations"
 }
