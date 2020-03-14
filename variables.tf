@@ -69,6 +69,16 @@ variable "availability_zones" {
   type        = list(string)
 }
 
+variable "igw_id" {
+  type        = string
+  description = "Internet Gateway ID the public route table will point to (e.g. `igw-9c26a123`)"
+}
+
+variable "cidr_block" {
+  type        = string
+  description = "Base CIDR block which will be divided into subnet CIDR blocks (e.g. `10.0.0.0/16`)"
+}
+
 variable "vpc_default_route_table_id" {
   type        = string
   default     = ""
